@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "163832027695",
+    "project_id": "plankingtimer",
+    "storage_bucket": "plankingtimer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163832027695:android:92edbe2e106b3abf6784da",
+        "android_client_info": {
+          "package_name": "com.alextos.plankingtimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163832027695-oojd34b9j0h8qvmfabjcpbl35p52omlk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwlM4z7hdWws6xTJ-R2mfeFULFdmihtN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163832027695-oojd34b9j0h8qvmfabjcpbl35p52omlk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163832027695-udk6dvs0v23sqe1d4s99nbuk4upi5gd8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mooncascade.plankingtimer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
