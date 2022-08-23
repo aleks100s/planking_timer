@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.ui.theme
+package com.alextos.plankingtimer.presentation.ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
