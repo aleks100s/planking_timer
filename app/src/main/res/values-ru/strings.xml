@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Planking Timer</string>
+    <string name="my_timers">Мои таймеры</string>
+    <string name="new_timer">Новый таймер</string>
+    <string name="save">Сохранить</string>
+    <string name="title">Заголовок</string>
+    <string name="planking_parts">Этапы планкинга</string>
+    <string name="add_subplank">Добавить этап</string>
+    <string name="crash">Краш</string>
+    <string name="stop">Стоп</string>
+</resources>

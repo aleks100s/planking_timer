@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Planking Timer</string>
+    <string name="my_timers">My timers</string>
+    <string name="new_timer">New timer</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="planking_parts">Planking parts</string>
+    <string name="add_subplank">Add subplank</string>
+    <string name="crash">Crash</string>
+    <string name="stop">Stop</string>
 </resources>
