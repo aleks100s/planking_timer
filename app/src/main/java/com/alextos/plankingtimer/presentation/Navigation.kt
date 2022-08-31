@@ -15,7 +15,7 @@ fun Navigation() {
             LaunchScreen(navController = navController)
         }
         composable(route = Screen.TimerScreen.route) {
-            TimerScreen(60)
+            TimerScreen()
         }
     }
 }

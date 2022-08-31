@@ -16,7 +16,7 @@ class LaunchViewModel: ViewModel() {
 
     init {
         viewModelScope.launch {
-            (0..10).asFlow()
+            (0..1).asFlow()
                 .onEach { delay(100) }
                 .onEach { print(it) }
                 .onCompletion { state.value = LaunchState(isLoaded = true) }

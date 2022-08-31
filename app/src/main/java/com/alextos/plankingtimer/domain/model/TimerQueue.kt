@@ -6,5 +6,4 @@ data class TimerQueue(
     val id: UUID,
     val title: String,
     val timers: List<Timer>
-) {
-}
+)
