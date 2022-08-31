@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.presentation.screens
+package com.alextos.plankingtimer.presentation.screens.launch_screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,19 +9,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.alextos.plankingtimer.R
-import com.alextos.plankingtimer.presentation.Screen
-import com.alextos.plankingtimer.presentation.screens.launch_screen.LaunchViewModel
 
 @Composable
-fun LaunchScreen(navController: NavController) {
+fun LaunchScreen(onLoadingFinished: () -> Unit) {
     val viewModel = viewModel<LaunchViewModel>()
     val state = viewModel.state
 
     LaunchedEffect(key1 = state.value.isLoaded) {
         if (state.value.isLoaded) {
-            navController.navigate(route = Screen.TimerScreen.route)
+            onLoadingFinished()
         }
     }
 

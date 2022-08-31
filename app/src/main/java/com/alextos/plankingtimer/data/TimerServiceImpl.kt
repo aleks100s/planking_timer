@@ -1,6 +1,5 @@
 package com.alextos.plankingtimer.data
 
-import com.alextos.plankingtimer.domain.model.Timer
 import com.alextos.plankingtimer.domain.services.TimerService
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -11,16 +10,19 @@ class TimerServiceImpl: TimerService {
 
     private var currentTimer: Job? = null
 
-    override fun startTimer(timer: Timer, scope: CoroutineScope) {
+    override fun startTimer(
+        time: Int,
+        scope: CoroutineScope,
+        completion: () -> Unit
+    ) {
         currentTimer?.cancel()
-        val time = timer.secondsCount
 
         currentTimer = scope.launch {
             (time - 1 downTo 0).asFlow()
                 .onEach { delay(1000) }
                 .onStart { emit(time) }
                 .conflate()
-                .onCompletion { _timerStateFlow.emit(0) }
+                .onCompletion { completion() }
                 .collect { _timerStateFlow.emit(it) }
         }
     }

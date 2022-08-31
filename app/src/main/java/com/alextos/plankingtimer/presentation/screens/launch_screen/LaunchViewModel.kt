@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class LaunchViewModel: ViewModel() {
+
+    data class LaunchState(val isLoaded: Boolean)
+
     var state = mutableStateOf(LaunchState(isLoaded = false))
         private set
 

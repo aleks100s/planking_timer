@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface TimerService {
     val timerStateFlow: StateFlow<Int>
 
-    fun startTimer(timer: Timer, scope: CoroutineScope)
+    fun startTimer(time: Int, scope: CoroutineScope, completion: () -> Unit)
     fun stopTimer()
 }
