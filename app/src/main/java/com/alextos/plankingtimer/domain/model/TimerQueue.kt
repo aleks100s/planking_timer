@@ -19,13 +19,13 @@ data class TimerQueue(
         val timer = TimerQueue(
             id = UUID.randomUUID(),
             title = "My planking timer",
-            timers = listOf(Timer.dummyTimer)
+            timers = listOf(Timer.dummyTimer1)
         )
 
         val timer2 = TimerQueue(
             id = UUID.randomUUID(),
             title = "My planking timer 2",
-            timers = listOf(Timer.dummyTimer)
+            timers = listOf(Timer.dummyTimer1, Timer.dummyTimer2)
         )
     }
 }

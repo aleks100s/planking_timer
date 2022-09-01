@@ -8,10 +8,16 @@ data class Timer(
     var secondsCount: Int
 ) {
     companion object {
-        val dummyTimer = Timer(
+        val dummyTimer1 = Timer(
             id = UUID.randomUUID(),
-            name = "Timer",
+            name = "Timer 1",
             secondsCount = 10
+        )
+
+        val dummyTimer2 = Timer(
+            id = UUID.randomUUID(),
+            name = "Timer 2",
+            secondsCount = 15
         )
     }
 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
+import com.alextos.plankingtimer.domain.model.Timer
 
 data class TimerData(
     val title: String,
@@ -30,8 +31,7 @@ data class TimerData(
 
 @Composable
 fun TimerScreen(
-    timerName: String,
-    secondsNumber: Int,
+    timer: Timer,
     onTimerStopped: () -> Unit,
     onTimerFinished: () -> Unit
 ) {
@@ -43,7 +43,7 @@ fun TimerScreen(
     }
     if (!timerHasStarted.value) {
         LaunchedEffect(key1 = true) {
-            viewModel.startTimer(secondsNumber, completion = onTimerFinished)
+            viewModel.startTimer(timer.secondsCount, onTimerFinished)
             timerHasStarted.value = true
         }
     }
@@ -58,9 +58,9 @@ fun TimerScreen(
     }
 
     val timerData = TimerData(
-        title = timerName,
+        title = timer.name,
         currentTime = state.value,
-        totalTime = secondsNumber,
+        totalTime = timer.secondsCount,
         isLandscape = isLandscape
     )
 

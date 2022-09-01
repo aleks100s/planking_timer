@@ -8,6 +8,6 @@ class MainViewModel: ViewModel() {
 
     data class MainState(val timers: List<TimerQueue>)
 
-    var state = mutableStateOf(MainState(timers = listOf(TimerQueue.timer, TimerQueue.timer, TimerQueue.timer)))
+    var state = mutableStateOf(MainState(timers = listOf(TimerQueue.timer, TimerQueue.timer2)))
         private set
 }
