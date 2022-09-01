@@ -8,4 +8,8 @@
     <string name="add_subplank">Add subplank</string>
     <string name="crash">Crash</string>
     <string name="stop">Stop</string>
+    <string name="enter_email">Enter your email</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login">Login</string>
 </resources>

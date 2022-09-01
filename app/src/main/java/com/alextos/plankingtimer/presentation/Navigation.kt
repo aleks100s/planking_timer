@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alextos.plankingtimer.domain.model.Timer
+import com.alextos.plankingtimer.presentation.screens.authentication.AuthenticationScreen
 import com.alextos.plankingtimer.presentation.screens.launch_screen.LaunchScreen
 import com.alextos.plankingtimer.presentation.screens.main.MainScreen
 import com.alextos.plankingtimer.presentation.screens.timer.TimerScreen
@@ -24,6 +25,12 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = Screen.LaunchScreen.route) {
         composable(route = Screen.LaunchScreen.route) {
             LaunchScreen {
+                navController.navigate(route = Screen.MainScreen.route)
+            }
+        }
+
+        composable(route = Screen.AuthenticationScreen.route) {
+            AuthenticationScreen {
                 navController.navigate(route = Screen.MainScreen.route)
             }
         }
