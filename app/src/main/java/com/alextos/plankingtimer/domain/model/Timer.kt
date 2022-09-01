@@ -11,7 +11,7 @@ data class Timer(
         val dummyTimer = Timer(
             id = UUID.randomUUID(),
             name = "Timer",
-            secondsCount = 60
+            secondsCount = 10
         )
     }
 }

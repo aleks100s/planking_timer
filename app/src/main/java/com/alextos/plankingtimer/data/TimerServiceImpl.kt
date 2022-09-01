@@ -12,8 +12,7 @@ class TimerServiceImpl: TimerService {
 
     override fun startTimer(
         time: Int,
-        scope: CoroutineScope,
-        completion: () -> Unit
+        scope: CoroutineScope
     ) {
         currentTimer?.cancel()
 
@@ -22,7 +21,6 @@ class TimerServiceImpl: TimerService {
                 .onEach { delay(1000) }
                 .onStart { emit(time) }
                 .conflate()
-                .onCompletion { completion() }
                 .collect { _timerStateFlow.emit(it) }
         }
     }
