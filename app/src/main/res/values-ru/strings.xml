@@ -13,4 +13,6 @@
     <string name="enter_password">Введите ваш password</string>
     <string name="sign_up">Регистрация</string>
     <string name="login">Вход</string>
+    <string name="increase">Увеличить на 15 секунд</string>
+    <string name="decrease">Уменьшить на 15 секунд</string>
 </resources>

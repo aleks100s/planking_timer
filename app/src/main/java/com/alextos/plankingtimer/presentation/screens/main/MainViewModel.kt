@@ -2,7 +2,7 @@ package com.alextos.plankingtimer.presentation.screens.main
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.alextos.plankingtimer.domain.model.TimerQueue
+import com.alextos.plankingtimer.domain.model.main.TimerQueue
 
 class MainViewModel: ViewModel() {
 

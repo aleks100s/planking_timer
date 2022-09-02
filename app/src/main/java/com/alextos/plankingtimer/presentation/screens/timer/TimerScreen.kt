@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
-import com.alextos.plankingtimer.domain.model.Timer
+import com.alextos.plankingtimer.domain.model.main.Timer
 
 data class TimerData(
     val title: String,

@@ -1,8 +1,7 @@
 package com.alextos.plankingtimer.domain.services
 
-import com.alextos.plankingtimer.domain.model.TimerQueue
+import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import com.alextos.plankingtimer.domain.util.Resource
-import kotlinx.coroutines.flow.Flow
 
 interface RepositoryService {
     suspend fun getTimerList(collection: String): Resource<List<TimerQueue>>

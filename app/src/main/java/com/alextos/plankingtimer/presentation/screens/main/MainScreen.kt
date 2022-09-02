@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
-import com.alextos.plankingtimer.domain.model.TimerQueue
+import com.alextos.plankingtimer.domain.model.main.TimerQueue
+import com.alextos.plankingtimer.presentation.common.Label
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
 
@@ -114,19 +115,5 @@ fun TimerListItem(timer: TimerQueue, modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.ic_baseline_timer_24),
             text = "${timer.totalSeconds()}s"
         )
-    }
-}
-
-@Composable
-fun Label(painter: Painter, text: String) {
-    Row {
-        Icon(
-            painter = painter,
-            tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
-            contentDescription = text,
-            modifier = Modifier.size(24.dp)
-        )
-        Spacer(Modifier.width(16.dp))
-        Text(text = text)
     }
 }

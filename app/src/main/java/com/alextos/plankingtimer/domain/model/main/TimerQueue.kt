@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.domain.model
+package com.alextos.plankingtimer.domain.model.main
 
 import java.util.*
 

@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.alextos.plankingtimer.domain.model.Timer
+import com.alextos.plankingtimer.domain.model.main.Timer
 import com.alextos.plankingtimer.presentation.screens.authentication.AuthenticationScreen
 import com.alextos.plankingtimer.presentation.screens.create.CreateTimerScreen
 import com.alextos.plankingtimer.presentation.screens.launch_screen.LaunchScreen
