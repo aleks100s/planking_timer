@@ -75,24 +75,10 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                     .padding(16.dp)
             ) {
                 item {
-                    OutlinedTextField(
-                        value = state.title.asString(),
-                        onValueChange = viewModel::timerTitleChanged,
-                        label = {
-                            Text(stringResource(id = R.string.title, listOf(CreateTimerViewModel.STEP)))
-                        },
-                        maxLines = 1,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 8.dp)
+                    TimerTitleSection(
+                        title = state.title.asString(),
+                        onTitleChanged = viewModel::timerTitleChanged
                     )
-
-                    Spacer(Modifier.height(32.dp))
                 }
 
                 itemsIndexed(state.parts) { index, part ->
@@ -127,28 +113,14 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                             Text(part.secondsCount.toString())
 
                             Row {
-                                Button(
-                                    onClick = {
-                                        viewModel.decreaseTimerPart(index = index)
-                                    },
-                                    enabled = part.secondsCount > 15
-                                ) {
-                                    Icon(painter = painterResource(
-                                        id = R.drawable.ic_baseline_remove_24),
-                                        contentDescription = stringResource(id = R.string.decrease)
-                                    )
+                                DecreaseButton(enabled = part.secondsCount > 15) {
+                                    viewModel.decreaseTimerPart(index = index)
                                 }
+
                                 Spacer(Modifier.width(8.dp))
-                                Button(
-                                    onClick = {
-                                        viewModel.increaseTimerPart(index = index)
-                                    },
-                                    enabled = part.secondsCount < 900
-                                ) {
-                                    Icon(painter = painterResource(
-                                        id = R.drawable.ic_baseline_add_24),
-                                        contentDescription = stringResource(id = R.string.increase)
-                                    )
+
+                                IncreaseButton(enabled = part.secondsCount < 900) {
+                                    viewModel.increaseTimerPart(index = index)
                                 }
                             }
                         }
@@ -156,24 +128,80 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                 }
 
                 item {
-                    Spacer(modifier = (Modifier.height(32.dp)))
-
-                    Label(
-                        painter = painterResource(id = R.drawable.ic_baseline_add_24),
-                        text = stringResource(id = R.string.add_subplank),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .clickable {
-                                viewModel.addNewPart()
-                            }
-                            .padding(16.dp)
-                    )
+                    AddSubTimerSection {
+                        viewModel.addNewPart()
+                    }
                 }
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TimerTitleSection(title: String, onTitleChanged: (String) -> Unit) {
+    OutlinedTextField(
+        value = title,
+        onValueChange = onTitleChanged,
+        label = {
+            Text(stringResource(id = R.string.title, listOf(CreateTimerViewModel.STEP)))
+        },
+        maxLines = 1,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 8.dp)
+    )
+
+    Spacer(Modifier.height(32.dp))
+}
+
+@Composable
+fun DecreaseButton(enabled: Boolean, onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        enabled = enabled
+    ) {
+        Icon(painter = painterResource(
+            id = R.drawable.ic_baseline_remove_24),
+            contentDescription = stringResource(id = R.string.decrease)
+        )
+    }
+}
+
+@Composable
+fun IncreaseButton(enabled: Boolean, onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        enabled = enabled
+    ) {
+        Icon(painter = painterResource(
+            id = R.drawable.ic_baseline_add_24),
+            contentDescription = stringResource(id = R.string.increase)
+        )
+    }
+}
+
+@Composable
+fun AddSubTimerSection(onClick: () -> Unit) {
+    Spacer(modifier = (Modifier.height(32.dp)))
+
+    Label(
+        painter = painterResource(id = R.drawable.ic_baseline_add_24),
+        text = stringResource(id = R.string.add_subplank),
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(16.dp)
+            .clickable {
+                onClick()
+            }
+    )
 }
