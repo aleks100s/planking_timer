@@ -150,7 +150,7 @@ fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
             progress = currentTime / totalTime.toFloat()
         )
 
-        Text("$currentTime", fontSize = 24.sp)
+        Text(currentTime.toString(), fontSize = 24.sp)
     }
 }
 

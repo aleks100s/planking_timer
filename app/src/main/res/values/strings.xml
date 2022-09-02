@@ -5,7 +5,7 @@
     <string name="save">Save</string>
     <string name="title">Title</string>
     <string name="planking_parts">Planking parts</string>
-    <string name="add_subplank">Add subplank</string>
+    <string name="add_subtimer">Add subtimer</string>
     <string name="crash">Crash</string>
     <string name="stop">Stop</string>
     <string name="enter_email">Enter your email</string>
@@ -16,4 +16,5 @@
     <string name="timer">Timer</string>
     <string name="increase">Increase by %1$d seconds</string>
     <string name="decrease">Decrease by %1$d seconds</string>
+    <string name="time">%1$d min %2$d sec</string>
 </resources>

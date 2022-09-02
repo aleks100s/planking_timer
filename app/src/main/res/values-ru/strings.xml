@@ -6,7 +6,7 @@
     <string name="save">Сохранить</string>
     <string name="title">Заголовок</string>
     <string name="planking_parts">Этапы планкинга</string>
-    <string name="add_subplank">Добавить этап</string>
+    <string name="add_subtimer">Добавить этап таймера</string>
     <string name="crash">Краш</string>
     <string name="stop">Стоп</string>
     <string name="enter_email">Введите ваш email</string>
@@ -17,4 +17,5 @@
     <string name="timer">Таймер</string>
     <string name="increase">Увеличить на %1$d секунд</string>
     <string name="decrease">Уменьшить на %1$d секунд</string>
+    <string name="time">%1$d мин %2$d сек</string>
 </resources>

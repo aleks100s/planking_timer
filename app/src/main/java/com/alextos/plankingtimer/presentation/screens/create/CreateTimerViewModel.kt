@@ -44,18 +44,21 @@ class CreateTimerViewModel(
     fun timerPartTitleChanged(index: Int, title: String) {
         val currentParts = state.value.parts
         currentParts[index].title = UiText.DynamicString(title)
+        state.value = state.value.copy(parts = listOf())
         state.value = state.value.copy(parts = currentParts)
     }
 
     fun increaseTimerPart(index: Int) {
         val currentParts = state.value.parts
         currentParts[index].secondsCount += STEP
+        state.value = state.value.copy(parts = listOf())
         state.value = state.value.copy(parts = currentParts)
     }
 
     fun decreaseTimerPart(index: Int) {
         val currentParts = state.value.parts
         currentParts[index].secondsCount -= STEP
+        state.value = state.value.copy(parts = listOf())
         state.value = state.value.copy(parts = currentParts)
     }
 }

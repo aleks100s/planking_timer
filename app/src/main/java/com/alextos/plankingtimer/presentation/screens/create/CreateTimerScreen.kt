@@ -110,7 +110,7 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text(part.secondsCount.toString())
+                            Text(part.timeString().asString())
 
                             Row {
                                 DecreaseButton(enabled = part.secondsCount > 15) {
@@ -192,7 +192,7 @@ fun AddSubTimerSection(onClick: () -> Unit) {
 
     Label(
         painter = painterResource(id = R.drawable.ic_baseline_add_24),
-        text = stringResource(id = R.string.add_subplank),
+        text = stringResource(id = R.string.add_subtimer),
         modifier = Modifier
             .fillMaxWidth()
             .background(
