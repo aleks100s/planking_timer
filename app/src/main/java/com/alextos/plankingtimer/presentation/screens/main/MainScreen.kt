@@ -6,11 +6,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,42 +29,72 @@ import com.alextos.plankingtimer.domain.model.TimerQueue
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(onTimerSelected: (TimerQueue) -> Unit) {
+fun MainScreen(
+    onTimerSelected: (TimerQueue) -> Unit,
+    createNewTimer: () -> Unit
+) {
     val viewModel = viewModel<MainViewModel>()
     val state = viewModel.state.value
 
-    Column (
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(
-            text = stringResource(id = R.string.my_timers),
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
-        )
+    val listState = rememberLazyListState()
+// The FAB is initially expanded. Once the first visible item is past the first item we
+// collapse the FAB. We use a remembered derived state to minimize unnecessary compositions.
+    val expandedFab = remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex == 0
+        }
+    }
 
-        LazyColumn(
+    Scaffold(
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = createNewTimer,
+                expanded = expandedFab.value,
+                icon = { Icon(Icons.Filled.Add, stringResource(id = R.string.new_timer)) },
+                text = { Text(text = stringResource(id = R.string.new_timer)) },
+            )
+        },
+        floatingActionButtonPosition = FabPosition.End,
+    ) {
+        Column (
             modifier = Modifier
-                .padding(16.dp)
-                .background(
-                    color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
-                    shape = RoundedCornerShape(16.dp)
-                )
+                .fillMaxSize()
+                .padding(it)
         ) {
-            itemsIndexed(state.timers) { index, timer ->
-                TimerListItem(
-                    timer = timer,
-                    modifier = Modifier.clickable {
-                        onTimerSelected(timer)
+            Text(
+                text = stringResource(id = R.string.my_timers),
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(16.dp)
+            )
+
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .background(
+                        color = if (isSystemInDarkTheme()) DarkSurface2 else LightSurface2,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+            ) {
+                itemsIndexed(state.timers) { index, timer ->
+                    TimerListItem(
+                        timer = timer,
+                        modifier = Modifier.clickable {
+                            onTimerSelected(timer)
+                        }
+                    )
+                    if (index < state.timers.lastIndex) {
+                        Divider(color = Color.LightGray)
                     }
-                )
-                if (index < state.timers.lastIndex) {
-                    Divider(color = Color.LightGray)
                 }
             }
         }
     }
+
+
 }
 
 @Composable
