@@ -108,7 +108,7 @@ fun TimerListItem(timer: TimerQueue, modifier: Modifier = Modifier) {
     ) {
         Label(
             painter = painterResource(id = R.drawable.ic_baseline_title_24),
-            text = timer.title
+            text = timer.title.toString()
         )
         Spacer(modifier = Modifier.height(8.dp))
         Label(

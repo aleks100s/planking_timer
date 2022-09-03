@@ -43,7 +43,7 @@ fun TimerScreen(
     }
     if (!timerHasStarted.value) {
         LaunchedEffect(key1 = true) {
-            viewModel.startTimer(timer.secondsCount, onTimerFinished)
+            viewModel.startTimer(timer.secondsCount ?: 0, onTimerFinished)
             timerHasStarted.value = true
         }
     }
@@ -58,9 +58,9 @@ fun TimerScreen(
     }
 
     val timerData = TimerData(
-        title = timer.name,
+        title = timer.name.toString(),
         currentTime = state.value,
-        totalTime = timer.secondsCount,
+        totalTime = timer.secondsCount ?: 0,
         isLandscape = isLandscape
     )
 
@@ -136,7 +136,7 @@ fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .padding(16.dp)
+            .padding(horizontal = 16.dp, vertical = 32.dp)
             .aspectRatio(1f)
     ) {
         TimerCircle(

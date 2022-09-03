@@ -41,11 +41,11 @@ fun Navigation() {
         composable(route = Screen.MainScreen.route) {
             MainScreen(
                 onTimerSelected = { timerQueue ->
-                    timers.addAll(timerQueue.timers)
+                    timers.addAll(timerQueue.timers ?: listOf())
                     timers.removeFirstOrNull()?.let { timer ->
                         navController.navigate(route = Screen.TimerScreen.routeWithArgs(
                             timer.id.toString(),
-                            timer.name,
+                            timer.name.toString(),
                             timer.secondsCount.toString()
                         ))
                     }
@@ -73,7 +73,7 @@ fun Navigation() {
                 }
             )
         ) { entry ->
-            val id = UUID.fromString(entry.arguments?.getString("id") ?: "")
+            val id = entry.arguments?.getString("id") ?: ""
             val name = entry.arguments?.getString("name") ?: ""
             val secondsNumber = entry.arguments?.getInt("seconds") ?: 0
             val timer = Timer(id, name, secondsNumber)
@@ -91,7 +91,7 @@ fun Navigation() {
                         timers.removeFirstOrNull()?.let { timer ->
                             navController.navigate(route = Screen.TimerScreen.routeWithArgs(
                                 timer.id.toString(),
-                                timer.name,
+                                timer.name.toString(),
                                 timer.secondsCount.toString()
                             )) {
                                 popUpTo(Screen.MainScreen.route)
