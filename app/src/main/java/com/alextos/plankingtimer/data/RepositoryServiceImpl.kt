@@ -10,15 +10,11 @@ import kotlinx.coroutines.flow.callbackFlow
 
 class RepositoryServiceImpl: RepositoryService {
 
-    companion object {
-        val TAG: String = RepositoryServiceImpl::class.java.simpleName
-    }
-
     private val db = Firebase.firestore
 
     override fun subscribeTimerList(collection: String): Flow<List<TimerQueue>> {
         return callbackFlow {
-            val listener = db.collection("FXBr4Fu5S8VMpESPOUWagiIbzIC3")
+            val listener = db.collection(collection)
                 .addSnapshotListener { value, error ->
                     error?.let {
                         close()

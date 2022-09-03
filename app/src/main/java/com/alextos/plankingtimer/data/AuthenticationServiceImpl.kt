@@ -5,9 +5,6 @@ import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.util.Result
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 
 class AuthenticationServiceImpl: AuthenticationService {
 
@@ -51,5 +48,13 @@ class AuthenticationServiceImpl: AuthenticationService {
                     completion(Result.Error(message = task.exception?.localizedMessage ?: ""))
                 }
             }
+    }
+
+    override fun isUserAuthenticated(): Boolean {
+        return auth.currentUser != null
+    }
+
+    override fun getUserId(): String? {
+        return auth.currentUser?.uid
     }
 }

@@ -12,14 +12,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
 
 @Composable
-fun LaunchScreen(onLoadingFinished: () -> Unit) {
+fun LaunchScreen(
+    onAuthenticationNeeded: () -> Unit,
+    onLoadingFinished: (String?) -> Unit
+) {
     val viewModel = viewModel<LaunchViewModel>()
-    val state = viewModel.state
 
-    LaunchedEffect(key1 = state.value.isLoaded) {
-        if (state.value.isLoaded) {
-            onLoadingFinished()
-        }
+    LaunchedEffect(key1 = true) {
+        viewModel.checkAuthentication(
+            success = onLoadingFinished,
+            failure = onAuthenticationNeeded
+        )
     }
 
     Box(

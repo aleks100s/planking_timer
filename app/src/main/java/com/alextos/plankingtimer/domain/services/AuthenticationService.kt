@@ -14,4 +14,8 @@ interface AuthenticationService {
         password: String,
         completion: (Result<String>) -> Unit
     )
+
+    fun isUserAuthenticated(): Boolean
+
+    fun getUserId(): String?
 }

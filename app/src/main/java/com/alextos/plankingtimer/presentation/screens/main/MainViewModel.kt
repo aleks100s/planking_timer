@@ -18,9 +18,9 @@ class MainViewModel(
     private val _state = mutableStateOf(MainState())
     val state: State<MainState> = _state
 
-    init {
+    fun subscribe(collection: String) {
         viewModelScope.launch {
-            repository.subscribeTimerList("").collect { list ->
+            repository.subscribeTimerList(collection).collect { list ->
                 _state.value = _state.value.copy(timers = list)
             }
         }

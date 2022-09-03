@@ -1,30 +1,21 @@
 package com.alextos.plankingtimer.presentation.screens.launch_screen
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import com.alextos.plankingtimer.data.AuthenticationServiceImpl
+import com.alextos.plankingtimer.domain.services.AuthenticationService
 
-class LaunchViewModel: ViewModel() {
+class LaunchViewModel(
+    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
+): ViewModel() {
 
-    data class LaunchState(val isLoaded: Boolean)
-
-    private val _state = mutableStateOf(LaunchState(isLoaded = false))
-    val state: State<LaunchState> = _state
-
-    init {
-        viewModelScope.launch {
-            (0..10).asFlow()
-                .onEach { delay(100) }
-                .onEach { print(it) }
-                .onCompletion { _state.value = LaunchState(isLoaded = true) }
-                .collect()
+    fun checkAuthentication(
+        success: (String?) -> Unit,
+        failure: () -> Unit
+    ) {
+        if (authenticationService.isUserAuthenticated()) {
+            success(authenticationService.getUserId())
+        } else {
+            failure()
         }
     }
 }

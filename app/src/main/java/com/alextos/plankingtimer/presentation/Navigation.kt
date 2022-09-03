@@ -1,6 +1,5 @@
 package com.alextos.plankingtimer.presentation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavType
@@ -14,7 +13,6 @@ import com.alextos.plankingtimer.presentation.screens.create.CreateTimerScreen
 import com.alextos.plankingtimer.presentation.screens.launch_screen.LaunchScreen
 import com.alextos.plankingtimer.presentation.screens.main.MainScreen
 import com.alextos.plankingtimer.presentation.screens.timer.TimerScreen
-import java.util.*
 
 @Composable
 fun Navigation() {
@@ -26,20 +24,34 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = Screen.LaunchScreen.route) {
         composable(route = Screen.LaunchScreen.route) {
-            LaunchScreen {
-                navController.navigate(route = Screen.AuthenticationScreen.route)
-            }
+            LaunchScreen(
+                onAuthenticationNeeded = {
+                    navController.navigate(route = Screen.AuthenticationScreen.route)
+                },
+                onLoadingFinished = { uid ->
+                    navController.navigate(route = Screen.MainScreen.routeWithArgs(uid ?: ""))
+                }
+            )
         }
 
         composable(route = Screen.AuthenticationScreen.route) {
             AuthenticationScreen { uid ->
-                Log.d("USER_ID", uid)
-                navController.navigate(route = Screen.MainScreen.route)
+                navController.navigate(route = Screen.MainScreen.routeWithArgs(uid))
             }
         }
 
-        composable(route = Screen.MainScreen.route) {
+        composable(
+            route = Screen.MainScreen.route + "/{uid}",
+            arguments = listOf(
+                navArgument("uid") {
+                    type = NavType.StringType
+                }
+            )
+        ) { entry ->
+            val uid = entry.arguments?.getString("uid") ?: ""
+
             MainScreen(
+                uid = uid,
                 onTimerSelected = { timerQueue ->
                     timers.addAll(timerQueue.timers ?: listOf())
                     timers.removeFirstOrNull()?.let { timer ->

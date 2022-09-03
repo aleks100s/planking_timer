@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -33,6 +34,7 @@ import com.alextos.plankingtimer.presentation.theme.LightSurface2
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    uid: String,
     onTimerSelected: (TimerQueue) -> Unit,
     createNewTimer: () -> Unit
 ) {
@@ -46,6 +48,10 @@ fun MainScreen(
         derivedStateOf {
             listState.firstVisibleItemIndex == 0
         }
+    }
+
+    LaunchedEffect(key1 = true) {
+        viewModel.subscribe(uid)
     }
 
     Scaffold(
