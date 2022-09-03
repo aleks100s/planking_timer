@@ -1,5 +1,6 @@
 package com.alextos.plankingtimer.presentation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavType
@@ -26,12 +27,13 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = Screen.LaunchScreen.route) {
         composable(route = Screen.LaunchScreen.route) {
             LaunchScreen {
-                navController.navigate(route = Screen.MainScreen.route)
+                navController.navigate(route = Screen.AuthenticationScreen.route)
             }
         }
 
         composable(route = Screen.AuthenticationScreen.route) {
-            AuthenticationScreen {
+            AuthenticationScreen { uid ->
+                Log.d("USER_ID", uid)
                 navController.navigate(route = Screen.MainScreen.route)
             }
         }

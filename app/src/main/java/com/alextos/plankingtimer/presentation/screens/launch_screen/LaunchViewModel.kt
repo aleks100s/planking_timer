@@ -1,5 +1,6 @@
 package com.alextos.plankingtimer.presentation.screens.launch_screen
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,15 +15,15 @@ class LaunchViewModel: ViewModel() {
 
     data class LaunchState(val isLoaded: Boolean)
 
-    var state = mutableStateOf(LaunchState(isLoaded = false))
-        private set
+    private val _state = mutableStateOf(LaunchState(isLoaded = false))
+    val state: State<LaunchState> = _state
 
     init {
         viewModelScope.launch {
             (0..10).asFlow()
                 .onEach { delay(100) }
                 .onEach { print(it) }
-                .onCompletion { state.value = LaunchState(isLoaded = true) }
+                .onCompletion { _state.value = LaunchState(isLoaded = true) }
                 .collect()
         }
     }
