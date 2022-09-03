@@ -1,8 +1,6 @@
 package com.alextos.plankingtimer.presentation.screens.main
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -10,12 +8,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
+import com.alextos.plankingtimer.presentation.common.DeleteButton
 import com.alextos.plankingtimer.presentation.common.Label
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
@@ -82,9 +83,10 @@ fun MainScreen(
                 itemsIndexed(state.timers) { index, timer ->
                     TimerListItem(
                         timer = timer,
-                        modifier = Modifier.clickable {
-                            onTimerSelected(timer)
-                        }
+                        modifier = Modifier
+                            .clickable {
+                                onTimerSelected(timer)
+                            }
                     ) {
                         viewModel.deleteTimer(timer)
                     }
@@ -105,23 +107,27 @@ fun TimerListItem(
     modifier: Modifier = Modifier,
     onDelete: () -> Unit
 ) {
-    Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 8.dp)
-            .clickable {
-                onDelete()
-            }
-    ) {
-        Label(
-            painter = painterResource(id = R.drawable.ic_baseline_title_24),
-            text = timer.title.toString()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Label(
-            painter = painterResource(id = R.drawable.ic_baseline_timer_24),
-            text = stringResource(id = R.string.seconds, timer.totalSeconds())
-        )
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(horizontal = 24.dp, vertical = 8.dp)
+        ) {
+            Label(
+                painter = painterResource(id = R.drawable.ic_baseline_title_24),
+                text = timer.title.toString()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Label(
+                painter = painterResource(id = R.drawable.ic_baseline_timer_24),
+                text = stringResource(id = R.string.seconds, timer.totalSeconds())
+            )
+        }
+
+        DeleteButton {
+            onDelete()
+        }
     }
 }

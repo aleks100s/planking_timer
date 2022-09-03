@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
+import com.alextos.plankingtimer.presentation.common.DeleteButton
 import com.alextos.plankingtimer.presentation.common.Label
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
@@ -52,7 +53,7 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                 expanded = expandedFab.value,
                 icon = { Icon(Icons.Filled.Done, stringResource(id = R.string.save)) },
                 text = { Text(text = stringResource(id = R.string.save)) },
-                modifier = Modifier.alpha(if (state.parts.isEmpty()) 0f else 1f)
+                modifier = Modifier.alpha(if (state.isValid()) 1f else 0f)
             )
         },
         floatingActionButtonPosition = FabPosition.End,
@@ -117,10 +118,16 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                                     viewModel.decreaseTimerPart(index = index)
                                 }
 
-                                Spacer(Modifier.width(8.dp))
+                                Spacer(modifier = Modifier.width(8.dp))
 
                                 IncreaseButton(enabled = part.secondsCount < 900) {
                                     viewModel.increaseTimerPart(index = index)
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                DeleteButton {
+                                    viewModel.deletePart(index = index)
                                 }
                             }
                         }

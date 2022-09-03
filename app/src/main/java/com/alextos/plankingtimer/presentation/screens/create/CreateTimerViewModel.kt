@@ -23,7 +23,13 @@ class CreateTimerViewModel(
             title = "",
             secondsCount = STEP)
         )
-    )
+    ) {
+        fun isValid(): Boolean {
+            return title.isNotBlank()
+                    && parts.isNotEmpty()
+                    && parts.all { it.title.isNotBlank() }
+        }
+    }
 
     companion object {
         const val STEP = 15
@@ -80,6 +86,12 @@ class CreateTimerViewModel(
         val currentParts = state.value.parts
         currentParts[index].secondsCount -= STEP
         _state.value = _state.value.copy(parts = listOf())
+        _state.value = _state.value.copy(parts = currentParts)
+    }
+
+    fun deletePart(index: Int) {
+        val currentParts = _state.value.parts.toMutableList()
+        currentParts.removeAt(index)
         _state.value = _state.value.copy(parts = currentParts)
     }
 }
