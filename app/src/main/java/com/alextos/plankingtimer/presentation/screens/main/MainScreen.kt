@@ -119,7 +119,7 @@ fun TimerListItem(timer: TimerQueue, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(8.dp))
         Label(
             painter = painterResource(id = R.drawable.ic_baseline_timer_24),
-            text = "${timer.totalSeconds()}s"
+            text = stringResource(id = R.string.seconds, timer.totalSeconds())
         )
     }
 }

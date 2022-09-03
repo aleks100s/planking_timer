@@ -4,7 +4,7 @@ import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.util.UiText
 
 data class TimerPart(
-    var title: UiText,
+    var title: String,
     var secondsCount: Int
 ) {
     fun timeString(): UiText {

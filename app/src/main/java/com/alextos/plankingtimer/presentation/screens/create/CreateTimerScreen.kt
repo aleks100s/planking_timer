@@ -76,7 +76,7 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
             ) {
                 item {
                     TimerTitleSection(
-                        title = state.title.asString(),
+                        title = state.title,
                         onTitleChanged = viewModel::timerTitleChanged
                     )
                 }
@@ -95,7 +95,7 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                             .padding(vertical = 8.dp)
                     ) {
                         OutlinedTextField(
-                            value = part.title.asString(),
+                            value = part.title,
                             onValueChange = { title ->
                                 viewModel.timerPartTitleChanged(index, title)
                             },

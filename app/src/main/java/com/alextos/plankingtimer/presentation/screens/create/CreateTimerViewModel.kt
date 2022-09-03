@@ -3,20 +3,24 @@ package com.alextos.plankingtimer.presentation.screens.create
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.alextos.plankingtimer.R
+import com.alextos.plankingtimer.data.AuthenticationServiceImpl
 import com.alextos.plankingtimer.data.RepositoryServiceImpl
 import com.alextos.plankingtimer.domain.model.creation.TimerPart
+import com.alextos.plankingtimer.domain.model.main.Timer
+import com.alextos.plankingtimer.domain.model.main.TimerQueue
+import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
-import com.alextos.plankingtimer.domain.util.UiText
+import java.util.*
 
 class CreateTimerViewModel(
-    private val repositoryService: RepositoryService = RepositoryServiceImpl()
+    private val repositoryService: RepositoryService = RepositoryServiceImpl(),
+    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
 ): ViewModel() {
 
     data class CreateTimerState(
-        val title: UiText = UiText.StringResource(R.string.timer_title),
+        val title: String = "",
         val parts: List<TimerPart> = listOf(TimerPart(
-            title = UiText.StringResource(R.string.timer),
+            title = "",
             secondsCount = STEP)
         )
     )
@@ -29,23 +33,38 @@ class CreateTimerViewModel(
     val state: State<CreateTimerState> = _state
 
     fun saveTimer(completion: () -> Unit) {
+        val timerQueue = TimerQueue(
+            id = UUID.randomUUID().toString(),
+            title = _state.value.title,
+            timers = _state.value.parts.map {
+                Timer(
+                    id = UUID.randomUUID().toString(),
+                    name = it.title,
+                    secondsCount = it.secondsCount
+                )
+            }
+        )
+        repositoryService.saveTimer(
+            timer = timerQueue,
+            collection = authenticationService.getUserId() ?: ""
+        )
         completion()
     }
 
     fun timerTitleChanged(title: String) {
-        _state.value = _state.value.copy(title = UiText.DynamicString(title))
+        _state.value = _state.value.copy(title = title)
     }
 
     fun addNewPart() {
         val currentParts = _state.value.parts.toMutableList()
-        val newPart = TimerPart(title = UiText.StringResource(R.string.timer), secondsCount = STEP)
+        val newPart = TimerPart(title = "", secondsCount = STEP)
         currentParts.add(newPart)
         _state.value = _state.value.copy(parts = currentParts)
     }
 
     fun timerPartTitleChanged(index: Int, title: String) {
         val currentParts = _state.value.parts
-        currentParts[index].title = UiText.DynamicString(title)
+        currentParts[index].title = title
         _state.value = _state.value.copy(parts = listOf())
         _state.value = _state.value.copy(parts = currentParts)
     }
