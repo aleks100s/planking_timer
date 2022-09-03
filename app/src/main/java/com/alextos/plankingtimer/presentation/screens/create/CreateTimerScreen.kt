@@ -19,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.presentation.common.DeleteButton
 import com.alextos.plankingtimer.presentation.common.Label
+import com.alextos.plankingtimer.presentation.common.ScreenTitle
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
 
@@ -63,12 +62,7 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                 .fillMaxSize()
                 .padding(it)
         ) {
-            Text(
-                text = stringResource(id = R.string.new_timer),
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(16.dp)
-            )
+            ScreenTitle(title = stringResource(id = R.string.new_timer))
 
             LazyColumn(
                 state = listState,

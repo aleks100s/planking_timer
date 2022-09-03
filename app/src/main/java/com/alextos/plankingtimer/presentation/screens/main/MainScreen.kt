@@ -8,25 +8,22 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import com.alextos.plankingtimer.presentation.common.DeleteButton
 import com.alextos.plankingtimer.presentation.common.Label
+import com.alextos.plankingtimer.presentation.common.ScreenTitle
 import com.alextos.plankingtimer.presentation.theme.DarkSurface2
 import com.alextos.plankingtimer.presentation.theme.LightSurface2
 
@@ -64,12 +61,7 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-            Text(
-                text = stringResource(id = R.string.my_timers),
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(16.dp)
-            )
+            ScreenTitle(title = stringResource(id = R.string.my_timers))
 
             LazyColumn(
                 state = listState,
