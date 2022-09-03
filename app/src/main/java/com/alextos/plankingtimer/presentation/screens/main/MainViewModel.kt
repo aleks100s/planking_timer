@@ -4,13 +4,16 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alextos.plankingtimer.data.AuthenticationServiceImpl
 import com.alextos.plankingtimer.data.RepositoryServiceImpl
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
+import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val repository: RepositoryService = RepositoryServiceImpl()
+    private val repository: RepositoryService = RepositoryServiceImpl(),
+    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
 ): ViewModel() {
 
     data class MainState(val timers: List<TimerQueue> = listOf())
@@ -18,11 +21,19 @@ class MainViewModel(
     private val _state = mutableStateOf(MainState())
     val state: State<MainState> = _state
 
-    fun subscribe(collection: String) {
+    init {
         viewModelScope.launch {
-            repository.subscribeTimerList(collection).collect { list ->
+            val userId = authenticationService.getUserId() ?: ""
+            repository.subscribeTimerList(userId).collect { list ->
                 _state.value = _state.value.copy(timers = list)
             }
         }
+    }
+
+    fun deleteTimer(timer: TimerQueue) {
+        repository.deleteTimer(
+            timer = timer,
+            collection = authenticationService.getUserId() ?: ""
+        )
     }
 }

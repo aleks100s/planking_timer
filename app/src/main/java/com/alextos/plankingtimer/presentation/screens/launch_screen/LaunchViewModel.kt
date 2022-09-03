@@ -9,11 +9,11 @@ class LaunchViewModel(
 ): ViewModel() {
 
     fun checkAuthentication(
-        success: (String?) -> Unit,
+        success: () -> Unit,
         failure: () -> Unit
     ) {
         if (authenticationService.isUserAuthenticated()) {
-            success(authenticationService.getUserId())
+            success()
         } else {
             failure()
         }

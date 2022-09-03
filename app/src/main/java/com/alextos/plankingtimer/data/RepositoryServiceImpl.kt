@@ -38,6 +38,8 @@ class RepositoryServiceImpl: RepositoryService {
     }
 
     override fun deleteTimer(timer: TimerQueue, collection: String) {
-        TODO("Not yet implemented")
+        db.collection(collection)
+            .document(timer.id ?: "")
+            .delete()
     }
 }

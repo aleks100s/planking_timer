@@ -28,8 +28,8 @@ fun Navigation() {
                 onAuthenticationNeeded = {
                     navController.navigate(route = Screen.AuthenticationScreen.route)
                 },
-                onLoadingFinished = { uid ->
-                    navController.navigate(route = Screen.MainScreen.routeWithArgs(uid ?: ""))
+                onLoadingFinished = {
+                    navController.navigate(route = Screen.MainScreen.route)
                 }
             )
         }
@@ -40,18 +40,8 @@ fun Navigation() {
             }
         }
 
-        composable(
-            route = Screen.MainScreen.route + "/{uid}",
-            arguments = listOf(
-                navArgument("uid") {
-                    type = NavType.StringType
-                }
-            )
-        ) { entry ->
-            val uid = entry.arguments?.getString("uid") ?: ""
-
+        composable(route = Screen.MainScreen.route) {
             MainScreen(
-                uid = uid,
                 onTimerSelected = { timerQueue ->
                     timers.addAll(timerQueue.timers ?: listOf())
                     timers.removeFirstOrNull()?.let { timer ->

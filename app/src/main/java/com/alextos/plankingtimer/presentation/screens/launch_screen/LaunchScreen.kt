@@ -14,7 +14,7 @@ import com.alextos.plankingtimer.R
 @Composable
 fun LaunchScreen(
     onAuthenticationNeeded: () -> Unit,
-    onLoadingFinished: (String?) -> Unit
+    onLoadingFinished: () -> Unit
 ) {
     val viewModel = viewModel<LaunchViewModel>()
 
