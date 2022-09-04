@@ -1,6 +1,7 @@
 package com.alextos.plankingtimer.presentation.screens.timer
 
 import android.content.res.Configuration
+import android.media.MediaPlayer
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,10 @@ fun TimerScreen(
     }
     if (!timerHasStarted.value) {
         LaunchedEffect(key1 = true) {
-            viewModel.startTimer(timer.secondsCount ?: 0, onTimerFinished)
+            viewModel.startTimer(
+                secondsNumber = timer.secondsCount ?: 0,
+                completion = onTimerFinished
+            )
             timerHasStarted.value = true
         }
     }
