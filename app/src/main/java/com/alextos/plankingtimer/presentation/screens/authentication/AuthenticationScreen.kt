@@ -12,13 +12,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alextos.plankingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthenticationScreen(onAuthenticationSuccess: (String) -> Unit) {
-    val viewModel: AuthenticationViewModel = viewModel()
+    val viewModel: AuthenticationViewModel = hiltViewModel()
     val state = viewModel.state.value
 
     LaunchedEffect(key1 = state.userId) {

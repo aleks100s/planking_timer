@@ -1,7 +1,6 @@
 package com.alextos.plankingtimer.domain.services
 
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
-import com.alextos.plankingtimer.domain.util.Result
 import kotlinx.coroutines.flow.Flow
 
 interface RepositoryService {

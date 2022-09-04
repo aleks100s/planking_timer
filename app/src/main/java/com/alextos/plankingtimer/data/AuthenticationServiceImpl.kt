@@ -2,7 +2,7 @@ package com.alextos.plankingtimer.data
 
 import android.util.Log
 import com.alextos.plankingtimer.domain.services.AuthenticationService
-import com.alextos.plankingtimer.domain.util.Result
+import com.alextos.plankingtimer.common.util.Result
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

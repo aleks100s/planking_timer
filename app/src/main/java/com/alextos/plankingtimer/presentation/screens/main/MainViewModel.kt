@@ -4,16 +4,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alextos.plankingtimer.data.AuthenticationServiceImpl
-import com.alextos.plankingtimer.data.RepositoryServiceImpl
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
-    private val repository: RepositoryService = RepositoryServiceImpl(),
-    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val repository: RepositoryService,
+    private val authenticationService: AuthenticationService
 ): ViewModel() {
 
     data class MainState(val timers: List<TimerQueue> = listOf())

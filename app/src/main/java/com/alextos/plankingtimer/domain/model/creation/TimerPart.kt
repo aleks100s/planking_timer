@@ -1,7 +1,7 @@
 package com.alextos.plankingtimer.domain.model.creation
 
 import com.alextos.plankingtimer.R
-import com.alextos.plankingtimer.domain.util.UiText
+import com.alextos.plankingtimer.common.util.UiText
 
 data class TimerPart(
     var title: String,

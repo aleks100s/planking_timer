@@ -3,18 +3,19 @@ package com.alextos.plankingtimer.presentation.screens.create
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.alextos.plankingtimer.data.AuthenticationServiceImpl
-import com.alextos.plankingtimer.data.RepositoryServiceImpl
 import com.alextos.plankingtimer.domain.model.creation.TimerPart
 import com.alextos.plankingtimer.domain.model.main.Timer
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
+import javax.inject.Inject
 
-class CreateTimerViewModel(
-    private val repositoryService: RepositoryService = RepositoryServiceImpl(),
-    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
+@HiltViewModel
+class CreateTimerViewModel @Inject constructor(
+    private val repositoryService: RepositoryService,
+    private val authenticationService: AuthenticationService
 ): ViewModel() {
 
     data class CreateTimerState(

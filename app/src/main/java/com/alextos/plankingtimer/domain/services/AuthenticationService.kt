@@ -1,6 +1,6 @@
 package com.alextos.plankingtimer.domain.services
 
-import com.alextos.plankingtimer.domain.util.Result
+import com.alextos.plankingtimer.common.util.Result
 
 interface AuthenticationService {
     fun signUp(

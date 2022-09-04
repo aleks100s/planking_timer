@@ -16,7 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import com.alextos.plankingtimer.presentation.screens.timer.TimerScreen
 import com.alextos.plankingtimer.presentation.screens.timer.TimerViewModel
 import com.alextos.plankingtimer.presentation.theme.PlankingTimerTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

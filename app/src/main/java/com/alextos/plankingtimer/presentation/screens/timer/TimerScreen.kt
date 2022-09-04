@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.Timer
 
@@ -32,7 +32,7 @@ fun TimerScreen(
     onTimerStopped: () -> Unit,
     onTimerFinished: () -> Unit
 ) {
-    val viewModel = viewModel<TimerViewModel>()
+    val viewModel: TimerViewModel = hiltViewModel()
     val state = viewModel.timerState.collectAsState()
 
     val timerHasStarted = rememberSaveable {

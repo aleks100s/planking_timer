@@ -4,15 +4,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alextos.plankingtimer.data.AuthenticationServiceImpl
 import com.alextos.plankingtimer.domain.services.AuthenticationService
-import com.alextos.plankingtimer.domain.util.Result
+import com.alextos.plankingtimer.common.util.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthenticationViewModel(
-    private val authenticationService: AuthenticationService = AuthenticationServiceImpl()
+@HiltViewModel
+class AuthenticationViewModel @Inject constructor(
+    private val authenticationService: AuthenticationService
 ): ViewModel() {
 
     sealed class AuthMode {

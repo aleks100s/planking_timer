@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import com.alextos.plankingtimer.presentation.common.DeleteButton
@@ -33,7 +33,7 @@ fun MainScreen(
     onTimerSelected: (TimerQueue) -> Unit,
     createNewTimer: () -> Unit
 ) {
-    val viewModel = viewModel<MainViewModel>()
+    val viewModel: MainViewModel = hiltViewModel()
     val state = viewModel.state.value
 
     val listState = rememberLazyListState()

@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.domain.util
+package com.alextos.plankingtimer.common.util
 
 sealed class Result<T>(
     val data: T? = null,
