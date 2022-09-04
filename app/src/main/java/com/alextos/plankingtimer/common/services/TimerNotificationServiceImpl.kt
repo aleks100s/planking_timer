@@ -23,6 +23,7 @@ class TimerNotificationServiceImpl @Inject constructor(
             .setContentTitle(context.getString(R.string.remaining_time))
             .setContentText(context.getString(R.string.time, time / 60, time % 60))
             .setOngoing(true)
+            .setTimeoutAfter(2000)
             .build()
 
         manager.notify(NOTIFICATION_ID, notification)
