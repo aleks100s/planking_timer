@@ -1,6 +1,8 @@
 package com.alextos.plankingtimer.di
 
 import android.content.Context
+import com.alextos.plankingtimer.common.services.TimerNotificationService
+import com.alextos.plankingtimer.common.services.TimerNotificationServiceImpl
 import com.alextos.plankingtimer.common.util.SoundPlayer
 import com.alextos.plankingtimer.data.AuthenticationServiceImpl
 import com.alextos.plankingtimer.data.RepositoryServiceImpl
@@ -18,6 +20,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideTimerNotificationService(@ApplicationContext appContext: Context): TimerNotificationService {
+        return TimerNotificationServiceImpl(appContext)
+    }
 
     @Provides
     @Singleton

@@ -35,8 +35,8 @@ fun Navigation() {
         }
 
         composable(route = Screen.AuthenticationScreen.route) {
-            AuthenticationScreen { uid ->
-                navController.navigate(route = Screen.MainScreen.routeWithArgs(uid))
+            AuthenticationScreen {
+                navController.navigate(route = Screen.MainScreen.route)
             }
         }
 
