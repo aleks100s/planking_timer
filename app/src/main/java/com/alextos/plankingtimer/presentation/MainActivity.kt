@@ -26,10 +26,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private lateinit var manager: NotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         setContent {
             PlankingTimerTheme {
                 Surface(
