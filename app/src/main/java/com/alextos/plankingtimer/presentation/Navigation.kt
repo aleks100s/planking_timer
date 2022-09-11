@@ -98,6 +98,8 @@ fun Navigation() {
                             )) {
                                 popUpTo(Screen.MainScreen.route)
                             }
+                        } ?: run {
+                            navController.popBackStack()
                         }
                     }
                 }
