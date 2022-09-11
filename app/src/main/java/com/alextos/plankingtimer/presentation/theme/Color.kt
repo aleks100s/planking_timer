@@ -5,7 +5,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 val TimerBarColor = Color(0xFF4BE952)
-val TimerBackgroundColor = Color(0xFF272A2C)
+val TimerBackgroundColor = Color.Gray
 val AccentColor = Color(0xFF03A9F4)
 
 val LightSurface1 = Color(0xFFE7E7E7)

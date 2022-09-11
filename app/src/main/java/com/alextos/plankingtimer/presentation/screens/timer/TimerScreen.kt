@@ -2,9 +2,11 @@ package com.alextos.plankingtimer.presentation.screens.timer
 
 import android.content.res.Configuration
 import android.media.MediaPlayer
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,6 +22,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.Timer
+import com.alextos.plankingtimer.presentation.theme.TimerBackgroundColor
+import com.alextos.plankingtimer.presentation.theme.TimerBarColor
 
 data class TimerData(
     val title: String,
@@ -70,6 +74,7 @@ fun TimerScreen(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         if (isLandscape) {
             HorizontalTimer(data = timerData) {
@@ -142,12 +147,12 @@ fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
             .aspectRatio(1f)
     ) {
         TimerCircle(
-            color = Color.Gray,
+            color = TimerBackgroundColor,
             isHeightFirst = isLandscape
         )
 
         TimerCircle(
-            color = Color.Green,
+            color = TimerBarColor,
             isHeightFirst = isLandscape,
             progress = currentTime / totalTime.toFloat()
         )

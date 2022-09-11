@@ -1,7 +1,7 @@
 package com.alextos.plankingtimer.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,10 +17,9 @@ import com.alextos.plankingtimer.presentation.screens.timer.TimerScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val viewModel: NavigationViewModel = viewModel()
 
-    val timers = remember {
-        mutableListOf<Timer>()
-    }
+    val timers = viewModel.state.value
 
     NavHost(navController = navController, startDestination = Screen.LaunchScreen.route) {
         composable(route = Screen.LaunchScreen.route) {
@@ -43,8 +42,8 @@ fun Navigation() {
         composable(route = Screen.MainScreen.route) {
             MainScreen(
                 onTimerSelected = { timerQueue ->
-                    timers.addAll(timerQueue.timers ?: listOf())
-                    timers.removeFirstOrNull()?.let { timer ->
+                    viewModel.addTimers(timerQueue.timers ?: listOf())
+                    viewModel.popTimer()?.let { timer ->
                         navController.navigate(route = Screen.TimerScreen.routeWithArgs(
                             timer.id.toString(),
                             timer.name.toString(),
@@ -83,14 +82,14 @@ fun Navigation() {
             TimerScreen(
                 timer = timer,
                 onTimerStopped = {
-                    timers.clear()
+                    viewModel.clearTimers()
                     navController.popBackStack()
                 },
                 onTimerFinished = {
                     if (timers.isEmpty()) {
                         navController.popBackStack(Screen.MainScreen.route, inclusive = false)
                     } else {
-                        timers.removeFirstOrNull()?.let { timer ->
+                        viewModel.popTimer()?.let { timer ->
                             navController.navigate(route = Screen.TimerScreen.routeWithArgs(
                                 timer.id.toString(),
                                 timer.name.toString(),
