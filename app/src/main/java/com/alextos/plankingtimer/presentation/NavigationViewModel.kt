@@ -10,11 +10,14 @@ class NavigationViewModel: ViewModel() {
     val state: State<List<Timer>> = _state
 
     fun popTimer(): Timer? {
-        return _state.value.toMutableList().removeFirstOrNull()
+        val list = _state.value.toMutableList()
+        val timer =  list.removeFirstOrNull()
+        _state.value = list
+        return timer
     }
 
     fun clearTimers() {
-        _state.value.toMutableList().clear()
+        _state.value = listOf()
     }
 
     fun addTimers(list: List<Timer>) {

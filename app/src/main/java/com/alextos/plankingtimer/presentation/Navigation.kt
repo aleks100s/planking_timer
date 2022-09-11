@@ -44,11 +44,12 @@ fun Navigation() {
                 onTimerSelected = { timerQueue ->
                     viewModel.addTimers(timerQueue.timers ?: listOf())
                     viewModel.popTimer()?.let { timer ->
-                        navController.navigate(route = Screen.TimerScreen.routeWithArgs(
+                        val route = Screen.TimerScreen.routeWithArgs(
                             timer.id.toString(),
                             timer.name.toString(),
                             timer.secondsCount.toString()
-                        ))
+                        )
+                        navController.navigate(route = route)
                     }
                 },
                 createNewTimer = {
@@ -90,11 +91,12 @@ fun Navigation() {
                         navController.popBackStack(Screen.MainScreen.route, inclusive = false)
                     } else {
                         viewModel.popTimer()?.let { timer ->
-                            navController.navigate(route = Screen.TimerScreen.routeWithArgs(
+                            val route = Screen.TimerScreen.routeWithArgs(
                                 timer.id.toString(),
                                 timer.name.toString(),
                                 timer.secondsCount.toString()
-                            )) {
+                            )
+                            navController.navigate(route = route) {
                                 popUpTo(Screen.MainScreen.route)
                             }
                         } ?: run {

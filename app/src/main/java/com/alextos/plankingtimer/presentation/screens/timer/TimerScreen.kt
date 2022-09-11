@@ -1,7 +1,6 @@
 package com.alextos.plankingtimer.presentation.screens.timer
 
 import android.content.res.Configuration
-import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -14,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -41,14 +39,19 @@ fun TimerScreen(
     val viewModel: TimerViewModel = hiltViewModel()
     val state = viewModel.timerState.collectAsState()
 
+    if (viewModel.state.value.hasFinished) {
+        LaunchedEffect(key1 = true) {
+            onTimerFinished()
+        }
+    }
+
     val timerHasStarted = rememberSaveable {
         mutableStateOf(false)
     }
     if (!timerHasStarted.value) {
         LaunchedEffect(key1 = true) {
             viewModel.startTimer(
-                secondsNumber = timer.secondsCount ?: 0,
-                completion = onTimerFinished
+                secondsNumber = timer.secondsCount ?: 0
             )
             timerHasStarted.value = true
         }
