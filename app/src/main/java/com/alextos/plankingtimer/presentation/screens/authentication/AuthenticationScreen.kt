@@ -83,7 +83,10 @@ fun AuthenticationScreen(onAuthenticationSuccess: (String) -> Unit) {
 
                     Spacer(modifier = Modifier.height(32.dp))
 
-                    Button(onClick = viewModel::authenticate) {
+                    Button(
+                        onClick = viewModel::authenticate,
+                        enabled = state.isInputValid()
+                    ) {
                         Text(title)
                     }
                 }

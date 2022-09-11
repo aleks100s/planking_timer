@@ -27,7 +27,11 @@ class AuthenticationViewModel @Inject constructor(
         val email: String = "",
         val password: String = "",
         val userId: String? = null
-    )
+    ) {
+        fun isInputValid(): Boolean {
+            return email.isNotBlank() && password.isNotBlank()
+        }
+    }
 
     private val _state = mutableStateOf(AuthenticationState())
     val state: State<AuthenticationState> = _state
