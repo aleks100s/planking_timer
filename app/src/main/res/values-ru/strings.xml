@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Planking Timer</string>
+    <string name="app_name">Timer Series</string>
     <string name="my_timers">Мои таймеры</string>
     <string name="new_timer">Новый таймер</string>
     <string name="save">Сохранить</string>
     <string name="title">Заголовок</string>
-    <string name="planking_parts">Этапы планкинга</string>
+    <string name="planking_parts">Таймеры</string>
     <string name="add_subtimer">Добавить этап таймера</string>
     <string name="crash">Краш</string>
     <string name="stop">Стоп</string>
@@ -18,8 +18,8 @@
     <string name="increase">Увеличить на %1$d секунд</string>
     <string name="decrease">Уменьшить на %1$d секунд</string>
     <string name="time">%1$d мин %2$d сек</string>
-    <string name="seconds">%1$d seconds</string>
-    <string name="delete_timer">Delete timer</string>
+    <string name="seconds">%1$d секунд</string>
+    <string name="delete_timer">Удалить таймер</string>
     <string name="timer_channel">Таймер</string>
     <string name="timer_channel_description">Используется для показа времени таймера</string>
     <string name="remaining_time">Оставшееся время</string>
