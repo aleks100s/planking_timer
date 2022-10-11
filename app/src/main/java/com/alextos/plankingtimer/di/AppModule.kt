@@ -4,10 +4,8 @@ import android.content.Context
 import com.alextos.plankingtimer.common.services.TimerNotificationService
 import com.alextos.plankingtimer.common.services.TimerNotificationServiceImpl
 import com.alextos.plankingtimer.common.util.SoundPlayer
-import com.alextos.plankingtimer.data.AuthenticationServiceImpl
 import com.alextos.plankingtimer.data.RepositoryServiceImpl
 import com.alextos.plankingtimer.data.TimerServiceImpl
-import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
 import com.alextos.plankingtimer.domain.services.TimerService
 import dagger.Module
@@ -35,14 +33,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationService(): AuthenticationService {
-        return AuthenticationServiceImpl()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRepositoryService(): RepositoryService {
-        return RepositoryServiceImpl()
+    fun provideRepositoryService(@ApplicationContext appContext: Context): RepositoryService {
+        return RepositoryServiceImpl(appContext)
     }
 
     @Provides

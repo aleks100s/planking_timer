@@ -4,7 +4,7 @@ import com.alextos.plankingtimer.domain.model.main.TimerQueue
 import kotlinx.coroutines.flow.Flow
 
 interface RepositoryService {
-    fun saveTimer(timer: TimerQueue, collection: String)
-    fun deleteTimer(timer: TimerQueue, collection: String)
-    fun subscribeTimerList(collection: String): Flow<List<TimerQueue>>
+    fun saveTimer(timer: TimerQueue)
+    fun deleteTimer(timer: TimerQueue)
+    fun subscribeTimerList(): Flow<List<TimerQueue>>
 }

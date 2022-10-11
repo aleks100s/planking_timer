@@ -97,7 +97,9 @@ fun CreateTimerScreen(onTimerCreated: () -> Unit) {
                             placeholder = {
                                 Text(stringResource(id = R.string.title))
                             },
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 8.dp)
                         )
 
                         Row(

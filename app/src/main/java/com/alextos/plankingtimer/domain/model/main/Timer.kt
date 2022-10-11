@@ -3,9 +3,9 @@ package com.alextos.plankingtimer.domain.model.main
 import java.util.*
 
 data class Timer(
-    val id: String? = null,
-    var name: String? = null,
-    var secondsCount: Int? = null
+    val id: String,
+    var name: String,
+    var secondsCount: Int
 ) {
     companion object {
         val dummyTimer1 = Timer(

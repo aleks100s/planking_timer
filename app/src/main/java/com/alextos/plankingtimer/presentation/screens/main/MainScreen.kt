@@ -109,7 +109,7 @@ fun TimerListItem(
         ) {
             Label(
                 painter = painterResource(id = R.drawable.ic_baseline_title_24),
-                text = timer.title.toString()
+                text = timer.title
             )
             Spacer(modifier = Modifier.height(8.dp))
             Label(

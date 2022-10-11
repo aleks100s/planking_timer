@@ -5,16 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
-import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: RepositoryService,
-    private val authenticationService: AuthenticationService
+    private val repository: RepositoryService
 ): ViewModel() {
 
     data class MainState(val timers: List<TimerQueue> = listOf())
@@ -24,17 +23,15 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val userId = authenticationService.getUserId() ?: ""
-            repository.subscribeTimerList(userId).collect { list ->
+            repository.subscribeTimerList().collect { list ->
                 _state.value = _state.value.copy(timers = list)
             }
         }
     }
 
     fun deleteTimer(timer: TimerQueue) {
-        repository.deleteTimer(
-            timer = timer,
-            collection = authenticationService.getUserId() ?: ""
-        )
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteTimer(timer = timer)
+        }
     }
 }

@@ -3,19 +3,20 @@ package com.alextos.plankingtimer.presentation.screens.create
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alextos.plankingtimer.domain.model.creation.TimerPart
 import com.alextos.plankingtimer.domain.model.main.Timer
 import com.alextos.plankingtimer.domain.model.main.TimerQueue
-import com.alextos.plankingtimer.domain.services.AuthenticationService
 import com.alextos.plankingtimer.domain.services.RepositoryService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateTimerViewModel @Inject constructor(
-    private val repositoryService: RepositoryService,
-    private val authenticationService: AuthenticationService
+    private val repositoryService: RepositoryService
 ): ViewModel() {
 
     data class CreateTimerState(
@@ -51,10 +52,11 @@ class CreateTimerViewModel @Inject constructor(
                 )
             }
         )
-        repositoryService.saveTimer(
-            timer = timerQueue,
-            collection = authenticationService.getUserId() ?: ""
-        )
+
+        viewModelScope.launch(Dispatchers.IO) {
+            repositoryService.saveTimer(timer = timerQueue)
+        }
+
         completion()
     }
 

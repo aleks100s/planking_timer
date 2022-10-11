@@ -3,16 +3,16 @@ package com.alextos.plankingtimer.domain.model.main
 import java.util.*
 
 data class TimerQueue(
-    val id: String? = null,
-    val title: String? = null,
-    val timers: List<Timer>? = null
+    val id: String,
+    val title: String,
+    val timers: List<Timer>
 ) {
     fun totalSeconds(): Int {
-        return timers?.map {
-            it.secondsCount ?: 0
-        }?.reduce { acc, secondsCount ->
+        return timers.map {
+            it.secondsCount
+        }.reduce { acc, secondsCount ->
             acc + secondsCount
-        } ?: 0
+        }
     }
 
     companion object {

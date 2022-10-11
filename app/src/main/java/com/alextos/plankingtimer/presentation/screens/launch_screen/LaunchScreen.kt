@@ -10,20 +10,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alextos.plankingtimer.R
 
 @Composable
 fun LaunchScreen(
-    onAuthenticationNeeded: () -> Unit,
     onLoadingFinished: () -> Unit
 ) {
-    val viewModel: LaunchViewModel = hiltViewModel()
+    val viewModel: LaunchViewModel = viewModel()
 
     LaunchedEffect(key1 = true) {
-        viewModel.checkAuthentication(
-            success = onLoadingFinished,
-            failure = onAuthenticationNeeded
+        viewModel.loadApplication(
+            completion = onLoadingFinished
         )
     }
 
