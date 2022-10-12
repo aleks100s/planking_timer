@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.presentation
+package com.alextos.plankingtimer.presentation.navigation
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

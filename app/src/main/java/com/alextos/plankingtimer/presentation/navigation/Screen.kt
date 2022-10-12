@@ -1,4 +1,4 @@
-package com.alextos.plankingtimer.presentation
+package com.alextos.plankingtimer.presentation.navigation
 
 sealed class Screen(val route: String) {
     object LaunchScreen: Screen("launch_screen")
