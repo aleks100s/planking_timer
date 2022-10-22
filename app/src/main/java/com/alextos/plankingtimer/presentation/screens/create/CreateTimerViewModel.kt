@@ -21,10 +21,7 @@ class CreateTimerViewModel @Inject constructor(
 
     data class CreateTimerState(
         val title: String = "",
-        val parts: List<TimerPart> = listOf(TimerPart(
-            title = "",
-            secondsCount = STEP)
-        )
+        val parts: List<TimerPart> = listOf()
     ) {
         fun isValid(): Boolean {
             return title.isNotBlank()
@@ -64,11 +61,15 @@ class CreateTimerViewModel @Inject constructor(
         _state.value = _state.value.copy(title = title)
     }
 
-    fun addNewPart() {
+    fun addNewPart(title: String) {
         val currentParts = _state.value.parts.toMutableList()
-        val newPart = TimerPart(title = "", secondsCount = STEP)
+        val newPart = TimerPart(title = "$title ${getTimerStepNumber()}", secondsCount = STEP)
         currentParts.add(newPart)
         _state.value = _state.value.copy(parts = currentParts)
+    }
+
+    private fun getTimerStepNumber(): Int {
+        return _state.value.parts.count() + 1
     }
 
     fun timerPartTitleChanged(index: Int, title: String) {

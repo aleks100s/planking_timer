@@ -1,15 +1,15 @@
-package com.alextos.plankingtimer.presentation
+package com.alextos.plankingtimer.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.alextos.plankingtimer.R
 import com.alextos.plankingtimer.domain.model.main.Timer
-import com.alextos.plankingtimer.presentation.navigation.NavigationViewModel
-import com.alextos.plankingtimer.presentation.navigation.Screen
 import com.alextos.plankingtimer.presentation.screens.create.CreateTimerScreen
 import com.alextos.plankingtimer.presentation.screens.launch_screen.LaunchScreen
 import com.alextos.plankingtimer.presentation.screens.main.MainScreen
@@ -100,9 +100,11 @@ fun Navigation() {
         }
 
         composable(route = Screen.CreateTimerScreen.route) {
-            CreateTimerScreen {
-                navController.popBackStack()
-            }
+            CreateTimerScreen(
+                onTimerCreated = { navController.popBackStack() },
+                timerTitle = stringResource(id = R.string.timer),
+                timerStepTitle = stringResource(id = R.string.timer_step)
+            )
         }
     }
 }

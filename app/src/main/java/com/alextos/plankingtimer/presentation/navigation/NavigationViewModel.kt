@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.alextos.plankingtimer.domain.model.main.Timer
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class NavigationViewModel: ViewModel() {
     private val _state = mutableStateOf<List<Timer>>(listOf())

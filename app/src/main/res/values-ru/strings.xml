@@ -23,4 +23,5 @@
     <string name="timer_channel">Таймер</string>
     <string name="timer_channel_description">Используется для показа времени таймера</string>
     <string name="remaining_time">Оставшееся время</string>
+    <string name="timer_step">Шаг таймера</string>
 </resources>
