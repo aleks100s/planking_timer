@@ -24,4 +24,9 @@
     <string name="timer_channel_description">Используется для показа времени таймера</string>
     <string name="remaining_time">Оставшееся время</string>
     <string name="timer_step">Шаг таймера</string>
+    <plurals name="remaining_timers">
+        <item quantity="one">Еще %d таймер</item>
+        <item quantity="few">Еще %d таймера</item>
+        <item quantity="many">Еще %d таймеров</item>
+    </plurals>
 </resources>

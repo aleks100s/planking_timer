@@ -23,4 +23,9 @@
     <string name="timer_channel_description">Used for showing current timer value</string>
     <string name="remaining_time">Remaining time</string>
     <string name="timer_step">Timer step</string>
+    <plurals name="remaining_timers">
+        <item quantity="zero">No timers left</item>
+        <item quantity="one">%d timer left</item>
+        <item quantity="other">%d timers left</item>
+    </plurals>
 </resources>

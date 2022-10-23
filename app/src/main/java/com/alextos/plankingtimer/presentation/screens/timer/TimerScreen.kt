@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alextos.plankingtimer.R
+import com.alextos.plankingtimer.common.util.timeString
 import com.alextos.plankingtimer.domain.model.main.Timer
 import com.alextos.plankingtimer.presentation.theme.TimerBackgroundColor
 import com.alextos.plankingtimer.presentation.theme.TimerBarColor
@@ -33,6 +34,7 @@ data class TimerData(
 @Composable
 fun TimerScreen(
     timer: Timer,
+    timersLeft: Int,
     onTimerStopped: () -> Unit,
     onTimerFinished: () -> Unit
 ) {
@@ -51,7 +53,7 @@ fun TimerScreen(
     if (!timerHasStarted.value) {
         LaunchedEffect(key1 = true) {
             viewModel.startTimer(
-                secondsNumber = timer.secondsCount ?: 0
+                secondsNumber = timer.secondsCount
             )
             timerHasStarted.value = true
         }
@@ -67,9 +69,9 @@ fun TimerScreen(
     }
 
     val timerData = TimerData(
-        title = timer.name.toString(),
+        title = timer.name,
         currentTime = state.value,
-        totalTime = timer.secondsCount ?: 0,
+        totalTime = timer.secondsCount,
         isLandscape = isLandscape
     )
 
@@ -90,11 +92,18 @@ fun TimerScreen(
                 onTimerStopped()
             }
         }
+
+        Box(
+            contentAlignment = Alignment.TopEnd,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TimersCounter(count = timersLeft)
+        }
     }
 }
 
 @Composable
-fun HorizontalTimer(data: TimerData, onClick: () -> Unit) {
+private fun HorizontalTimer(data: TimerData, onClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
@@ -118,7 +127,7 @@ fun HorizontalTimer(data: TimerData, onClick: () -> Unit) {
 }
 
 @Composable
-fun VerticalTimer(data: TimerData, onClick: () -> Unit) {
+private fun VerticalTimer(data: TimerData, onClick: () -> Unit) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TimerTitle(title = data.title)
 
@@ -133,7 +142,7 @@ fun VerticalTimer(data: TimerData, onClick: () -> Unit) {
 }
 
 @Composable
-fun TimerTitle(title: String) {
+private fun TimerTitle(title: String) {
     Text(
         text = title,
         fontSize = 24.sp,
@@ -142,7 +151,7 @@ fun TimerTitle(title: String) {
 }
 
 @Composable
-fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
+private fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -160,12 +169,12 @@ fun TimerClock(currentTime: Int, totalTime: Int, isLandscape: Boolean) {
             progress = currentTime / totalTime.toFloat()
         )
 
-        Text(currentTime.toString(), fontSize = 24.sp)
+        Text(currentTime.timeString(), fontSize = 24.sp)
     }
 }
 
 @Composable
-fun TimerCircle(color: Color, isHeightFirst: Boolean, progress: Float = 1f) {
+private fun TimerCircle(color: Color, isHeightFirst: Boolean, progress: Float = 1f) {
     CircularProgressIndicator(
         progress = progress,
         strokeWidth = 8.dp,
@@ -183,7 +192,7 @@ fun TimerCircle(color: Color, isHeightFirst: Boolean, progress: Float = 1f) {
 }
 
 @Composable
-fun StopButton(onClick: () -> Unit) {
+private fun StopButton(onClick: () -> Unit) {
     Button(onClick = onClick) {
         Text(stringResource(id = R.string.stop))
     }

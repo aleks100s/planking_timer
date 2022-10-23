@@ -74,6 +74,7 @@ fun Navigation() {
 
             TimerScreen(
                 timer = timer,
+                timersLeft = timers.count(),
                 onTimerStopped = {
                     viewModel.clearTimers()
                     navController.popBackStack()

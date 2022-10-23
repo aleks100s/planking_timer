@@ -152,7 +152,7 @@ fun CreateTimerScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimerTitleSection(title: String, onTitleChanged: (String) -> Unit) {
+private fun TimerTitleSection(title: String, onTitleChanged: (String) -> Unit) {
     OutlinedTextField(
         value = title,
         onValueChange = onTitleChanged,
@@ -174,7 +174,7 @@ fun TimerTitleSection(title: String, onTitleChanged: (String) -> Unit) {
 }
 
 @Composable
-fun DecreaseButton(enabled: Boolean, onClick: () -> Unit) {
+private fun DecreaseButton(enabled: Boolean, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         enabled = enabled
@@ -187,7 +187,7 @@ fun DecreaseButton(enabled: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-fun IncreaseButton(enabled: Boolean, onClick: () -> Unit) {
+private fun IncreaseButton(enabled: Boolean, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         enabled = enabled
@@ -200,7 +200,7 @@ fun IncreaseButton(enabled: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-fun AddSubTimerSection(onClick: () -> Unit) {
+private fun AddSubTimerSection(onClick: () -> Unit) {
     Spacer(modifier = (Modifier.height(32.dp)))
 
     Label(

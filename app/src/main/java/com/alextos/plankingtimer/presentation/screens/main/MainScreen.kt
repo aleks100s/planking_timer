@@ -94,7 +94,7 @@ fun MainScreen(
 }
 
 @Composable
-fun TimerListItem(
+private fun TimerListItem(
     timer: TimerQueue,
     modifier: Modifier = Modifier,
     onDelete: () -> Unit
