@@ -93,11 +93,13 @@ fun TimerScreen(
             }
         }
 
-        Box(
-            contentAlignment = Alignment.TopEnd,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            TimersCounter(count = timersLeft)
+        if (timersLeft > 0) {
+            Box(
+                contentAlignment = Alignment.TopEnd,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                TimersCounter(count = timersLeft)
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.alextos.plankingtimer.presentation.screens.timer
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,7 +30,7 @@ fun TimersCounter(count: Int) {
             )
         )
 
-        LazyRow {
+        LazyRow(horizontalArrangement = Arrangement.End) {
             items(counter) { index ->
                 TimerThumbnail(alpha = 1F - index * 0.2F)
             }
