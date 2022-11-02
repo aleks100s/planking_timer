@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Timer Series</string>
+    <string name="my_timers">Minu taimerid</string>
+    <string name="new_timer">Loo uus taimer</string>
+    <string name="save">Salvesta</string>
+    <string name="title">Pealkiri</string>
+    <string name="planking_parts">Taimerid</string>
+    <string name="add_subtimer">Lisa taimeri samm</string>
+    <string name="stop">Stopp</string>
+    <string name="enter_email">Sisestage oma e-posti aadress</string>
+    <string name="enter_password">Sisestage oma parool</string>
+    <string name="sign_up">Registreeri</string>
+    <string name="login">Logi sisse</string>
+    <string name="timer_title">Taimeri pealkiri</string>
+    <string name="timer">Taimer</string>
+    <string name="increase">Suurendada %1$d sekundit</string>
+    <string name="decrease">Vähendada võrra %1$d sekundit</string>
+    <string name="time">%1$d min %2$d sek</string>
+    <string name="seconds">%1$d sekundit</string>
+    <string name="delete_timer">Kustuta taimer</string>
+    <string name="timer_channel">Taimer</string>
+    <string name="timer_channel_description">Kasutatakse taimeri praeguse väärtuse kuvamiseks</string>
+    <string name="remaining_time">Järelejäänud aeg</string>
+    <string name="timer_step">Taimeri samm</string>
+    <plurals name="remaining_timers">
+        <item quantity="one">%d taimer jäänud</item>
+        <item quantity="other">%d taimerit jäänud</item>
+    </plurals>
+</resources>
